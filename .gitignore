@@ -1,0 +1,7 @@
+__pycache__/
+*.pyc
+*.log
+tasks_log.jsonl
+tasks_log.jsonl.bak
+test_temp_*.jsonl
+test_temp_*.jsonl.bak
