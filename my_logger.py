@@ -1,31 +1,25 @@
-# my_logger.py
 import logging
+import os
 
-# Настройка логгера
-LOG_FILE = "task_manager.log"
+CURRENT_DIR = os.path.dirname(os.path.abspath(__file__))
+LOG_FILE = os.path.join(CURRENT_DIR, "task_manager.log")
 
-# Создаём логгер
 logger = logging.getLogger("TaskManager")
 logger.setLevel(logging.INFO)
 
-# Если логгер уже настроен (чтобы не дублировать handlers при повторном импорте)
 if not logger.handlers:
-    # Создаём обработчик для записи в файл
     file_handler = logging.FileHandler(LOG_FILE, encoding="utf-8")
     file_handler.setLevel(logging.INFO)
 
-    # Создаём обработчик для вывода в консоль (опционально)
     console_handler = logging.StreamHandler()
-    console_handler.setLevel(logging.WARNING)  # В консоль только WARNING и выше
+    console_handler.setLevel(logging.WARNING)
 
-    # Формат лога: время - уровень - сообщение
     formatter = logging.Formatter(
         "%(asctime)s - %(levelname)s - %(message)s", datefmt="%Y-%m-%d %H:%M:%S"
     )
     file_handler.setFormatter(formatter)
     console_handler.setFormatter(formatter)
 
-    # Добавляем обработчики
     logger.addHandler(file_handler)
     logger.addHandler(console_handler)
 
